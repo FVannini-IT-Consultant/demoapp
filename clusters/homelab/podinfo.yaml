@@ -1,34 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: podinfo
   namespace: default
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: nginx
+      app: podinfo
   template:
     metadata:
       labels:
-        app: nginx
+        app: podinfo
     spec:
       containers:
-        - name: nginx
-          image: nginx:latest
+        - name: podinfo
+          image: ghcr.io/stefanprodan/podinfo:latest
           ports:
-            - containerPort: 80
-
+            - containerPort: 9898
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: podinfo
   namespace: default
 spec:
   selector:
-    app: nginx
+    app: podinfo
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 9898
+
