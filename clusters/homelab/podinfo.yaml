@@ -25,6 +25,7 @@ metadata:
   name: podinfo
   namespace: default
 spec:
+  type: LoadBalancer
   selector:
     app: podinfo
   ports:
